@@ -8,6 +8,9 @@
 /* Added by Chris Richards (cjr@tivoli.com) */
 #ifdef _WIN32
 #include <io.h>
+#define access _access
+#else
+#include <unistd.h>
 #endif
 
 #ifdef STD_LOGGING	
@@ -1087,7 +1090,7 @@ void ShowGun(edict_t *ent)
 			strcat(model, skin);
 			strcat(model, "\\w_chicken.md2");
 
-			if (_access(model, 2) == 0)
+			if (access(model, 2) == 0)
 				ent->client->gotChickenModel = 1;
 			else
 				ent->client->gotChickenModel = 0;
